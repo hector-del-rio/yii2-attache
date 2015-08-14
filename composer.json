@@ -1,0 +1,38 @@
+{
+  "name": "hector-del-rio/yii2-attache",
+  "description": "Will ease up the pains of combining yii2-user and yii2-admin extensions.",
+  "type": "yii2-extension",
+  "keywords": [
+    "yii2",
+    "yii2-admin",
+    "yii2-user",
+    "auth",
+    "permission",
+    "role",
+    "authorization",
+    "user",
+    "login"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Hector del Rio",
+      "email": "public.hector.del.rio@gmail.com"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/hector-del-rio/yii2-attache/issues",
+    "wiki": "https://github.com/hector-del-rio/yii2-attache/wiki",
+    "source": "https://github.com/hector-del-rio/yii2-attache"
+  },
+  "require": {
+    "yiisoft/yii2": "*",
+    "dektrium/yii2-user": "*",
+    "mdmsoft/yii2-admin": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "hectordelrio\\attache\\": ""
+    }
+  }
+}
