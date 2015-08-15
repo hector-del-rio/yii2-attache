@@ -5,6 +5,7 @@ namespace hectordelrio\attache;
 use Yii;
 use yii\base\BootstrapInterface;
 use yii\helpers\ArrayHelper;
+use yii\web\Application as WebApplication;
 
 class Bootstrap implements BootstrapInterface
 {
@@ -30,6 +31,10 @@ class Bootstrap implements BootstrapInterface
      */
     public function bootstrap($app)
     {
+        if (!($app instanceof WebApplication)) {
+            return;
+        }
+        
         $tableNames = Yii::$app->db->getSchema()->tableNames;
         $userModule = $app->getModule('user');
         $adminModule = $app->getModule('admin');
