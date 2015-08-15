@@ -6,7 +6,7 @@ use Yii;
 use yii\base\BootstrapInterface;
 use yii\helpers\ArrayHelper;
 
-class Module extends \yii\base\Module implements BootstrapInterface
+class Bootstrap implements BootstrapInterface
 {
     /**
      * @var array yii2-user extension options
