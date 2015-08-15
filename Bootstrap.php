@@ -49,10 +49,6 @@ class Bootstrap implements BootstrapInterface
             return;
         }
 
-        if (!empty(array_diff([$this->userTableName, $authManager->assignmentTable], $tableNames))) {
-            throw new \yii\db\Exception("Unable to find table {$this->userTableName} or {$authManager->assignmentTable}");
-        }
-
         // yii2-user
         if (empty($userModule)) {
             $app->setModule('user', ArrayHelper::merge($this->admin, [
@@ -76,6 +72,10 @@ class Bootstrap implements BootstrapInterface
 
         // all users with admin role to has full access to yii2-user user management interface
         if (($authManager instanceof \yii\rbac\DbManager)) {
+            if (!empty(array_diff([$this->userTableName, $authManager->assignmentTable], $tableNames))) {
+                throw new \yii\db\Exception("Unable to find table {$this->userTableName} or {$authManager->assignmentTable}");
+            }
+
             if (empty(array_diff([$this->userTableName, $authManager->assignmentTable], $tableNames))) {
                 Yii::$app->getModule('user')->admins = (new \yii\db\Query())
                     ->select('username')
