@@ -34,8 +34,5 @@
     "psr-4": {
       "hectordelrio\\attache\\": ""
     }
-  },
-  "extra": {
-    "bootstrap": "hectordelrio\\attache\\Module"
   }
 }
