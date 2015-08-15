@@ -1,5 +1,6 @@
 <?php
 
+use yii\console\Controller;
 use yii\db\Migration;
 
 class m150805_184320_yii2admin_migrations extends Migration
