@@ -1,7 +1,5 @@
 <?php
 
-namespace hectordelrio\attache\migrations;
-
 use yii\db\Migration;
 use dektrium\user\models\User;
 use dektrium\user\models\LoginForm;

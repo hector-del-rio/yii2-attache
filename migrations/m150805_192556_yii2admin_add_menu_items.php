@@ -1,7 +1,5 @@
 <?php
 
-namespace hectordelrio\attache\migrations;
-
 use yii\db\Migration;
 
 class m150805_192556_yii2admin_add_menu_items extends Migration

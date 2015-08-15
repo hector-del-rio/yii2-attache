@@ -1,7 +1,5 @@
 <?php
 
-namespace hectordelrio\attache\migrations;
-
 use yii\db\Migration;
 
 class m150805_191315_yii2admin_add_role_admin extends Migration

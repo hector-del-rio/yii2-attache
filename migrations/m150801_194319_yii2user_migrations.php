@@ -1,7 +1,5 @@
 <?php
 
-namespace hectordelrio\attache\migrations;
-
 use yii\console\Controller;
 use yii\db\Migration;
 
