@@ -34,13 +34,12 @@ class Bootstrap implements BootstrapInterface
         if (!($app instanceof WebApplication)) {
             return;
         }
-        
+
         $tableNames = Yii::$app->db->getSchema()->tableNames;
         $userModule = $app->getModule('user');
         $adminModule = $app->getModule('admin');
         $authManager = $app->get('authManager', false);
-        $userComponent = $app->get('user', false);
-
+        
         if (
             ($userModule !== null and !($userModule instanceof \dektrium\user\Module)) or
             ($adminModule !== null and !($adminModule instanceof \mdm\admin\Module))
@@ -61,18 +60,21 @@ class Bootstrap implements BootstrapInterface
             ]));
         }
 
-        if (!empty($userComponent)) {
-            $userComponent->on('afterLogin', function () {
-                // open session and store user profile in it
-                $session = Yii::$app->session;
-                $session->open();
-                $session->set('profile', Yii::$app->user->identity->getProfile()->one()->attributes);
-                $session->close();
-            });
-            $userComponent->on('afterLogout', function () {
-                // close and destroy session data
-                Yii::$app->session->destroy();
-            });
+        if (!$app->has('user')) {
+            $app->set('user', ArrayHelper::merge($this->admin, [
+                'identityClass' => 'dektrium\user\models\User',
+                'on afterLogin' => function () {
+                    // open session and store user profile in it
+                    $session = Yii::$app->session;
+                    $session->open();
+                    $session->set('profile', Yii::$app->user->identity->getProfile()->one()->attributes);
+                    $session->close();
+                },
+                'on afterLogout' => function () {
+                    // close and destroy session data
+                    Yii::$app->session->destroy();
+                },
+            ]));
         }
 
         // all users with admin role to has full access to yii2-user user management interface
