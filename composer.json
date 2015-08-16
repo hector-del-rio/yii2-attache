@@ -29,10 +29,5 @@
     "yiisoft/yii2": "*",
     "dektrium/yii2-user": "*",
     "mdmsoft/yii2-admin": "*"
-  },
-  "autoload": {
-    "psr-4": {
-      "hectordelrio\\attache\\": ""
-    }
   }
 }
