@@ -4,6 +4,7 @@ namespace hectordelrio\attache;
 
 use Yii;
 use yii\base\BootstrapInterface;
+use yii\base\Application;
 use yii\web\Application as WebApplication;
 use yii\web\User;
 
