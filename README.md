@@ -4,13 +4,20 @@ Will ease up the pains of combining yii2-user and yii2-admin extensions.
 Usage
 -----
 
-First, run:
+Add in config/common.php (or config file that applies to web and console applications):
 
-```shell
-    $ ./yii migrate --migrationPath="@app/vendor/hector-del-rio/yii2-attache/migrations"
+```php
+    'components' => [
+        ...
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager'
+        ],
+        ...
+    ],
+    ...
 ```
 
-Then in config/common.php
+in config/web.php (or config file that applies ONLY to web application)
 
 ```php
     'bootstrap' => [
@@ -25,19 +32,6 @@ Then in config/common.php
         ]
         ...
     ],
-    'components' => [
-        ...
-        'authManager' => [
-            'class' => 'yii\rbac\DbManager'
-        ],
-        ...
-    ],
-    ...
-```
-
-in config/web.php
-
-```php
     'modules' => [
         ...
         'user' => [
@@ -50,6 +44,12 @@ in config/web.php
         ],
         ...
     ],
+```
+
+Then run:
+
+```shell
+    $ ./yii migrate --migrationPath="@app/vendor/hector-del-rio/yii2-attache/migrations"
 ```
 
 Options
