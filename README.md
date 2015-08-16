@@ -3,7 +3,14 @@ Will ease up the pains of combining yii2-user and yii2-admin extensions.
 
 Usage
 -----
-in common.php
+
+First, run:
+
+```shell
+    $ ./yii migrate --migrationPath="@app/vendor/hector-del-rio/yii2-attache/migrations"
+```
+
+Then in config/common.php
 
 ```php
     'bootstrap' => [
@@ -35,7 +42,7 @@ in common.php
     ...
 ```
 
-in web.php
+in config/web.php
 
 ```php
     'components' => [

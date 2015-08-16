@@ -8,6 +8,19 @@ class m150805_191756_yii2user_add_admin_user extends Migration
 {
     public function safeUp()
     {
+        $app = Yii::$app;
+
+        $app->setModule('user', [
+            'class' => 'dektrium\user\Module'
+        ]);
+
+        if (!isset($app->get('i18n')->translations['user*'])) {
+            $app->get('i18n')->translations['user*'] = [
+                'class'    => \yii\i18n\PhpMessageSource::className(),
+                'basePath' => Yii::getAlias('@dektrium/user/migrations'),
+            ];
+        }
+
         $controller = Yii::$app->controller;
         $user = new User(['scenario' => 'register']);
 
@@ -22,7 +35,7 @@ class m150805_191756_yii2user_add_admin_user extends Migration
             // get email
             $email = $controller->prompt(
                 $controller->ansiFormat("\tE-mail: ",
-                \yii\helpers\Console::FG_BLUE)
+                    \yii\helpers\Console::FG_BLUE)
             );
 
             // get username
@@ -42,20 +55,18 @@ class m150805_191756_yii2user_add_admin_user extends Migration
 
         } while (!$user->save());
 
-        $profile = $user->profile;
-
         do {
-
-            if ($profile->hasErrors()) {
-                $this->showErrors($profile);
-            }
-
             // get realname
-            $profile->name = $controller->prompt($controller->ansiFormat("\tFull name: ",
+            $name = $controller->prompt($controller->ansiFormat("\tFull name: ",
                 \yii\helpers\Console::FG_BLUE));
 
             echo "\n\n";
-        } while (!$profile->save());
+
+        } while (empty($name));
+
+        $this->update('profile', ['name' => $name], 'user_id=:user_id',[
+            ':user_id' => $user->primaryKey
+        ]);
 
         $this->insert('auth_assignment', [
             'item_name' => 'admin',
