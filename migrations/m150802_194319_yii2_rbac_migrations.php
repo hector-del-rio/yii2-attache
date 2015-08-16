@@ -1,6 +1,5 @@
 <?php
 
-use yii\console\Controller;
 use yii\db\Migration;
 
 class m150802_194319_yii2_rbac_migrations extends Migration
@@ -16,9 +15,9 @@ class m150802_194319_yii2_rbac_migrations extends Migration
         system(Yii::getAlias("@app/yii") . " migrate/up  --interactive=0 --migrationPath=@yii/rbac/migrations", $errorCode);
 
         if ($errorCode == "0") {
-            return Controller::EXIT_CODE_NORMAL;
+            return true;
         } else {
-            return Controller::EXIT_CODE_ERROR;
+            return false;
         }
     }
 
@@ -33,9 +32,9 @@ class m150802_194319_yii2_rbac_migrations extends Migration
         system(Yii::getAlias("@app/yii") . " migrate/down  --interactive=0 --migrationPath=@yii/rbac/migrations", $errorCode);
 
         if ($errorCode == "0") {
-            return Controller::EXIT_CODE_NORMAL;
+            return true;
         } else {
-            return Controller::EXIT_CODE_ERROR;
+            return false;
         }
     }
 }
