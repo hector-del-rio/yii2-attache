@@ -31,6 +31,10 @@ class Bootstrap implements BootstrapInterface
      */
     public function bootstrap($app)
     {
+        $app->set('authManager', [
+            'class' => 'yii\rbac\DbManager'
+        ]);
+        
         if (!($app instanceof WebApplication)) {
             return;
         }
@@ -40,9 +44,6 @@ class Bootstrap implements BootstrapInterface
         $tableNames = Yii::$app->db->getSchema()->tableNames;
         $userModule = $app->getModule('user');
         $adminModule = $app->getModule('admin');
-        $app->set('authManager', [
-            'class' => 'yii\rbac\DbManager'
-        ]);
         $authManager = $app->getAuthManager();
 
         if (
