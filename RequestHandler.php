@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Hector
- * Date: 16.08.15
- * Time: 11:53
- */
 
 namespace hectordelrio\attache;
 
