@@ -25,13 +25,6 @@ Then in config/common.php
         ]
         ...
     ],
-    'modules' => [
-        ...
-        'user' => [
-            'class' => 'dektrium\user\Module',
-        ],
-        ...
-    ],
     'components' => [
         ...
         'authManager' => [
@@ -45,15 +38,18 @@ Then in config/common.php
 in config/web.php
 
 ```php
-    'components' => [
+    'modules' => [
         ...
         'user' => [
-            'on afterLogin' => ['hectordelrio\attache\EventHandler', 'storeProfileInSession'],
-            'on afterLogout' => ['hectordelrio\attache\EventHandler', 'destroyProfileFromSession'],
-        ]
+            'class' => 'dektrium\user\Module',
+            // yii2-user options
+        ],
+        'admin' => [
+            'class' => 'mdm\admin\Module',
+            // yii2-admin options
+        ],
         ...
     ],
-    'as access' => 'mdm\admin\components\AccessControl',
 ```
 
 Options
