@@ -27,7 +27,7 @@
   },
   "require": {
     "yiisoft/yii2": "*",
-    "dektrium/yii2-user": "*",
+    "dektrium/yii2-user": "^0",
     "mdmsoft/yii2-admin": "^2.0"
   },
   "autoload": {
