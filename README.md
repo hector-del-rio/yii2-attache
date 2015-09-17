@@ -44,6 +44,10 @@ in config/web.php (or config file that applies ONLY to web application)
         ],
         ...
     ],
+    'as access' => [
+        'class' => 'mdm\admin\components\AccessControl',
+        // yii2-admin access behavior options
+    ],
 ```
 
 Then run:
