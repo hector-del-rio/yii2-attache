@@ -1,5 +1,7 @@
 <?php
 
+use dektrium\user\helpers\Password;
+use yii\db\Expression;
 use yii\db\Migration;
 use dektrium\user\models\User;
 use dektrium\user\models\LoginForm;
@@ -48,12 +50,16 @@ class m150805_191756_yii2user_add_admin_user extends Migration
             system('stty echo');
             echo "\n";
 
-            $user->username = $username;
-            $user->password = $password;
-            $user->email = $email;
-            $user->confirmed_at = new \yii\db\Expression('UNIX_TIMESTAMP()');
+            $affectedRows = Yii::$app->db->createCommand()
+                ->insert('user', [
+                    'username' => (string)$username,
+                    'email' => $email,
+                    'password_hash' => Password::hash($password),
+                    'confirmed_at' => new Expression('UNIX_TIMESTAMP()')
+                ])
+                ->execute();
 
-        } while (!$user->save());
+        } while ($affectedRows < 1);
 
         do {
             // get realname
@@ -64,14 +70,18 @@ class m150805_191756_yii2user_add_admin_user extends Migration
 
         } while (empty($name));
 
+        $userPrimaryKey = User::findOne([
+            'email' => $email
+        ])->primaryKey;
+
         $this->update('profile', ['name' => $name], 'user_id=:user_id',[
-            ':user_id' => $user->primaryKey
+            ':user_id' => $userPrimaryKey
         ]);
 
         $this->insert('auth_assignment', [
             'item_name' => 'admin',
-            'user_id' => $user->primaryKey,
-            'created_at' => new \yii\db\Expression('UNIX_TIMESTAMP()')
+            'user_id' => $userPrimaryKey,
+            'created_at' => new Expression('UNIX_TIMESTAMP()')
         ]);
     }
 
