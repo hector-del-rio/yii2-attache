@@ -15,6 +15,19 @@ Add in config/common.php (or config file that applies to web and console applica
         ...
     ],
     ...
+    'modules' => [
+        ...
+        'user' => [
+            'class' => 'dektrium\user\Module',
+            // yii2-user options
+        ],
+        'admin' => [
+            'class' => 'mdm\admin\Module',
+            // yii2-admin options
+        ],
+        ...
+    ],
+    ...
 ```
 
 in config/web.php (or config file that applies ONLY to web application)
@@ -30,18 +43,6 @@ in config/web.php (or config file that applies ONLY to web application)
             'option2' => 'value2',
             ...
         ]
-        ...
-    ],
-    'modules' => [
-        ...
-        'user' => [
-            'class' => 'dektrium\user\Module',
-            // yii2-user options
-        ],
-        'admin' => [
-            'class' => 'mdm\admin\Module',
-            // yii2-admin options
-        ],
         ...
     ],
     'as access' => [
