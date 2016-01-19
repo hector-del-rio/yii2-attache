@@ -51,7 +51,7 @@ class m150805_191756_yii2user_add_admin_user extends Migration
             echo "\n";
 
             $affectedRows = Yii::$app->db->createCommand()
-                ->insert('user', [
+                ->insert('{{%user}}', [
                     'username' => (string)$username,
                     'email' => $email,
                     'password_hash' => Password::hash($password),
@@ -74,11 +74,11 @@ class m150805_191756_yii2user_add_admin_user extends Migration
             'email' => $email
         ])->primaryKey;
 
-        $this->update('profile', ['name' => $name], 'user_id=:user_id',[
+        $this->update('{{%profile}}', ['name' => $name], 'user_id=:user_id',[
             ':user_id' => $userPrimaryKey
         ]);
 
-        $this->insert('auth_assignment', [
+        $this->insert('{{%auth_assignment}}', [
             'item_name' => 'admin',
             'user_id' => $userPrimaryKey,
             'created_at' => new Expression('UNIX_TIMESTAMP()')
@@ -117,7 +117,7 @@ class m150805_191756_yii2user_add_admin_user extends Migration
             throw new \yii\console\Exception("Unable to find user {$username}");
         }
 
-        $this->delete('auth_assignment', [
+        $this->delete('{{%auth_assignment}}', [
             'item_name' => 'admin',
             'user_id' => $user->primaryKey,
         ]);

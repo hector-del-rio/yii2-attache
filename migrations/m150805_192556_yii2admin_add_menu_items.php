@@ -8,7 +8,7 @@ class m150805_192556_yii2admin_add_menu_items extends Migration
     public function safeUp()
     {
         $this->execute(
-            "INSERT INTO `menu` VALUES"
+            "INSERT INTO {{%menu}} VALUES"
             . " ('1', 'Admin', NULL, NULL, '0', 'return [\'icon\' => \'fa-terminal\'];'),"
             . " ('9', 'Authentication', '1', NULL, '1', 'return [\'icon\' => \'fa-key\'];'),"
             . " ('10', 'Gii', '1', '/gii', '3', 'return [\'icon\' => \'fa-code\'];'),"
@@ -24,7 +24,7 @@ class m150805_192556_yii2admin_add_menu_items extends Migration
     public function safeDown()
     {
         $this->execute(
-            "DELETE FROM `menu` WHERE `id` IN (1,2,3,4,6,7,8,9,10);"
+            "DELETE FROM {{%menu}} WHERE `id` IN (1,2,3,4,6,7,8,9,10);"
         );
     }
 }
