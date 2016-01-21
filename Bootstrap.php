@@ -38,12 +38,14 @@ class Bootstrap implements BootstrapInterface
         $authAssignmentTableName = $db->schema->getRawTableName($authManager->assignmentTable);
 
         if (empty(array_diff([$userTableName, $authAssignmentTableName], $tableNames))) {
-            $app->getModule('user')->admins += (new \yii\db\Query())
+            $admins = (new \yii\db\Query())
                 ->select('username')
                 ->from($userTableName)
                 ->leftJoin($authAssignmentTableName, 'user_id = id')
                 ->where("item_name = 'admin'")
                 ->column($db);
+
+            $app->getModule('user')->admins = array_merge($app->getModule('user')->admins, $admins);
         } else {
             throw new \yii\db\Exception("Unable to find table {$userTableName} or {$authAssignmentTableName}");
         }
