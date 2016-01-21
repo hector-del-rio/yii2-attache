@@ -38,7 +38,7 @@ class Bootstrap implements BootstrapInterface
         $authAssignmentTableName = $db->schema->getRawTableName($authManager->assignmentTable);
 
         if (empty(array_diff([$userTableName, $authAssignmentTableName], $tableNames))) {
-            $app->getModule('user')->admins = (new \yii\db\Query())
+            $app->getModule('user')->admins += (new \yii\db\Query())
                 ->select('username')
                 ->from($userTableName)
                 ->leftJoin($authAssignmentTableName, 'user_id = id')
