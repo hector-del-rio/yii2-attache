@@ -36,8 +36,9 @@ class Bootstrap implements BootstrapInterface
         $tableNames = $db->schema->tableNames;
         $userTableName = $db->schema->getRawTableName('{{%user}}');
         $authAssignmentTableName = $db->schema->getRawTableName($authManager->assignmentTable);
+        $diff = array_diff([$userTableName, $authAssignmentTableName], $tableNames);
 
-        if (empty(array_diff([$userTableName, $authAssignmentTableName], $tableNames))) {
+        if (empty($diff)) {
             $admins = (new \yii\db\Query())
                 ->select('username')
                 ->from($userTableName)
